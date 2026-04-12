@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import pool from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,24 +14,31 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
 
-    await pool.execute(`
-      CREATE TABLE IF NOT EXISTS audit_requests (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        business VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        phone VARCHAR(50) NOT NULL,
-        biz_type VARCHAR(100) NOT NULL,
-        biz_size VARCHAR(100) NOT NULL,
-        challenge VARCHAR(500) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-
-    await pool.execute(
-      `INSERT INTO audit_requests (name, business, email, phone, biz_type, biz_size, challenge) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [name, business, email, phone, bizType, bizSize, challenge]
-    );
+    // Database not yet configured — log submission and return success
+    // TODO: connect Railway MySQL and uncomment db logic
+    if (process.env.DB_HOST) {
+      const { default: pool } = await import("@/lib/db");
+      await pool.execute(`
+        CREATE TABLE IF NOT EXISTS audit_requests (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(255) NOT NULL,
+          business VARCHAR(255) NOT NULL,
+          email VARCHAR(255) NOT NULL,
+          phone VARCHAR(50) NOT NULL,
+          biz_type VARCHAR(100) NOT NULL,
+          biz_size VARCHAR(100) NOT NULL,
+          challenge VARCHAR(500) NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+      await pool.execute(
+        `INSERT INTO audit_requests (name, business, email, phone, biz_type, biz_size, challenge) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [name, business, email, phone, bizType, bizSize, challenge]
+      );
+    } else {
+      // No DB yet — just log to console (visible in Vercel logs)
+      console.log("New audit request:", { name, business, email, phone, bizType, bizSize, challenge });
+    }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
