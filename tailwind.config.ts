@@ -4,15 +4,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0B0C10",
-        "bg-2": "#0f1016",
-        "bg-3": "#13141c",
-        violet: "#6C5CE7",
-        aqua: "#00F5D4",
-        gold: "#F9C74F",
+        white: "#FFFFFF",
+        off: "#F7F7F5",
+        dark: "#0B0B0C",
+        "dark-2": "#1A1A1A",
+        mid: "#6B6B6B",
+        border: "#E8E8E6",
+        orange: "#FF6A00",
+        "orange-2": "#FFB347",
       },
       fontFamily: { sans: ["Inter","system-ui","sans-serif"] },
-      backgroundImage: { "gradient-radial": "radial-gradient(var(--tw-gradient-stops))" },
     },
   },
   plugins: [],

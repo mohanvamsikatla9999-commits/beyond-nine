@@ -1,151 +1,139 @@
 "use client";
-import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
-/* ── reveal helpers ── */
 const up = (delay = 0) => ({
-  initial: { opacity: 0, y: 32 },
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
 });
 const inUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
+  viewport: { once: true, margin: "-50px" },
+  transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] },
 });
 
-/* ── parallax section ── */
-function ParallaxOrb({ className }: { className: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-  return <motion.div ref={ref} style={{ y }} className={`orb ${className}`} />;
-}
-
-const problems = [
-  { n: "01", title: "Delayed Responses", body: "Leads arrive and wait. Every hour of delay reduces conversion probability by 10x.", accent: "#6C5CE7" },
-  { n: "02", title: "Lost Opportunities", body: "Prospects move on silently. No follow-up system means no second chance.", accent: "#00F5D4" },
-  { n: "03", title: "Fragmented Tools", body: "Software that doesn't communicate creates invisible gaps in your pipeline.", accent: "#6C5CE7" },
-  { n: "04", title: "Manual Overload", body: "Teams spend capacity on repetitive tasks instead of high-value decisions.", accent: "#00F5D4" },
-];
-
-const systems = [
+const services = [
   {
     n: "01",
-    name: "Intake Architecture",
-    body: "Captures and qualifies every inbound signal the moment it arrives. No delays. No missed demand.",
-    outcome: "Every lead captured. Every inquiry qualified.",
-    accent: "#6C5CE7",
+    name: "Lead Capture System",
+    desc: "We help you collect and organize leads from your website, ads, or social media — all in one place.",
+    benefit: "Never miss an inquiry again.",
   },
   {
     n: "02",
-    name: "Conversion Flow",
-    body: "A structured sequence that keeps every prospect engaged from first contact to final decision.",
-    outcome: "No opportunity left behind.",
-    accent: "#00F5D4",
+    name: "Automated Follow-Up",
+    desc: "We set up WhatsApp, email, or SMS automation so every lead gets a response — instantly, automatically.",
+    benefit: "No lead goes cold.",
   },
   {
     n: "03",
-    name: "Continuity Engine",
-    body: "Removes operational friction and keeps every workflow running without manual intervention.",
-    outcome: "Consistent output. Predictable delivery.",
-    accent: "#F9C74F",
+    name: "Conversion System",
+    desc: "We create landing pages and booking systems that turn visitors into paying customers.",
+    benefit: "More leads become clients.",
   },
 ];
 
-const steps = [
-  { n: "01", label: "Diagnose", body: "We map where your business is losing momentum — leads, conversions, operations." },
-  { n: "02", label: "Design", body: "We architect a system built around your specific workflows and growth objectives." },
-  { n: "03", label: "Deploy", body: "We implement with minimal disruption. Most systems are live within two weeks." },
-  { n: "04", label: "Refine", body: "We monitor performance and continuously improve every component." },
+const whatWeDo = [
+  "Capture every lead from every channel",
+  "Respond instantly — even at 2am",
+  "Follow up automatically until they convert",
+  "Convert more customers with less effort",
 ];
 
-const results = [
-  { metric: "Response cycles", shift: "Hours → Seconds" },
-  { metric: "Conversion rates", shift: "Inconsistent → Systematic" },
-  { metric: "Operational load", shift: "High → Significantly reduced" },
-  { metric: "Client experience", shift: "Reactive → Proactive" },
+const whyItMatters = [
+  { stat: "78%", label: "of customers buy from whoever responds first" },
+  { stat: "5x", label: "more conversions with automated follow-up" },
+  { stat: "20+", label: "hours saved per week on manual tasks" },
+  { stat: "< 60s", label: "average response time with our systems" },
+];
+
+const steps = [
+  { n: "01", title: "Understand your business", body: "We learn how you currently get and handle leads — and where you're losing them." },
+  { n: "02", title: "Build your system", body: "We design and set up the right automation for your business. Fast, clean, no complexity." },
+  { n: "03", title: "Launch quickly", body: "Most systems go live within 5–7 days. You start seeing results in the first week." },
+  { n: "04", title: "Improve results", body: "We monitor performance and keep improving until your numbers are where they should be." },
 ];
 
 export default function HomePage() {
   return (
-    <div className="bg-bg overflow-hidden">
+    <div className="bg-white overflow-hidden">
 
-      {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex items-center grid-cinema pt-[70px]">
-        {/* Orbs */}
-        <div className="orb w-[900px] h-[700px] top-[-200px] left-1/2 -translate-x-1/2 bg-[#6C5CE7]/10" />
-        <div className="orb w-[500px] h-[500px] top-1/2 left-[-10%] bg-[#00F5D4]/5" />
-        <div className="orb w-[400px] h-[400px] bottom-0 right-[-5%] bg-[#6C5CE7]/6" />
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex items-center pt-[68px] border-b border-[#E8E8E6]">
+        {/* Subtle bg texture */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(255,106,0,0.05),transparent)]" />
 
-        <div className="wrap relative z-10 py-28 w-full">
-          <motion.div {...up(0)} className="pill mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00F5D4] animate-pulse" />
-            Intelligent Growth Systems
-          </motion.div>
+        <div className="wrap relative z-10 py-24 w-full">
+          <div className="max-w-4xl">
+            <motion.div {...up(0)} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#E8E8E6] bg-[#F7F7F5] mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6A00] animate-pulse" />
+              <span className="text-[12px] font-semibold text-[#6B6B6B] tracking-wide">Growth Systems for Ambitious Businesses</span>
+            </motion.div>
 
-          <motion.h1 {...up(0.08)} className="d1 text-white max-w-5xl mb-8">
-            Growth doesn't fail from{" "}
-            <span className="gt-v">lack of effort.</span>
-            <br />
-            <span className="text-[#2E3044]">It fails from broken systems.</span>
-          </motion.h1>
+            <motion.h1 {...up(0.07)} className="d1 mb-7">
+              Stop losing leads.
+              <br />
+              <span className="text-[#FF6A00]">Start converting</span>
+              <br />
+              automatically.
+            </motion.h1>
 
-          <motion.p {...up(0.18)} className="body text-[17px] max-w-xl mb-12 leading-relaxed">
-            Beyond Nine designs intelligent systems that capture, respond, and convert —
-            without manual effort.
-          </motion.p>
+            <motion.p {...up(0.15)} className="body-lg max-w-xl mb-10">
+              Beyond Nine builds systems that capture, respond, and convert your leads — without manual effort.
+            </motion.p>
 
-          <motion.div {...up(0.26)} className="flex flex-wrap gap-4">
-            <Link href="/contact" className="btn-primary">
-              Request Strategy Call
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-            <Link href="/systems" className="btn-ghost">Explore Systems</Link>
-          </motion.div>
+            <motion.div {...up(0.22)} className="flex flex-wrap gap-4">
+              <Link href="/contact" className="btn-orange">
+                Book Strategy Call
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link href="/how-it-works" className="btn-outline">See How It Works</Link>
+            </motion.div>
+          </div>
 
-          {/* Scroll cue */}
-          <motion.div {...up(0.5)} className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-            <span className="label text-[#2E3044]">Scroll</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-px h-10 bg-gradient-to-b from-[#6C5CE7]/40 to-transparent"
-            />
+          {/* Stats row */}
+          <motion.div {...up(0.35)} className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-[#E8E8E6] rounded-2xl overflow-hidden border border-[#E8E8E6]">
+            {whyItMatters.map((w) => (
+              <div key={w.label} className="bg-white px-6 py-6 text-center">
+                <p className="text-[clamp(1.6rem,3vw,2.2rem)] font-black text-[#FF6A00] leading-none mb-1">{w.stat}</p>
+                <p className="text-[12px] text-[#6B6B6B] leading-snug">{w.label}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ─── PROBLEM ─── */}
-      <section className="py-32 border-t border-white/[0.05] relative">
-        <div className="orb w-[600px] h-[400px] top-0 right-0 bg-[#6C5CE7]/5" />
-        <div className="wrap relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      {/* ── WHAT WE DO ── */}
+      <section className="section border-b border-[#E8E8E6]">
+        <div className="wrap">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div {...inUp()}>
-              <div className="aqua-line mb-6" />
-              <p className="label-v mb-4">The Problem</p>
-              <h2 className="d2 text-white mb-6">
-                You're doing the work.
+              <div className="o-line mb-6" />
+              <p className="label-o mb-3">What We Actually Do</p>
+              <h2 className="d2 mb-6">
+                Simple systems.
                 <br />
-                <span className="text-[#2E3044]">The system isn't.</span>
+                Real results.
               </h2>
-              <p className="body max-w-md">
-                Most businesses have the demand. What they lack is the infrastructure to capture and convert it consistently.
+              <p className="body-lg max-w-md">
+                We design simple systems that help your business run smarter — so you stop losing leads and start converting more customers.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {problems.map((p, i) => (
-                <motion.div key={p.n} {...inUp(i * 0.1)} className="card-cinema p-6">
-                  <span className="mono block mb-3">{p.n}</span>
-                  <h3 className="text-white font-semibold text-[15px] mb-2" style={{ color: p.accent === "#00F5D4" ? "#00F5D4" : undefined }}>
-                    {p.title}
-                  </h3>
-                  <p className="body-sm">{p.body}</p>
+            <div className="space-y-3">
+              {whatWeDo.map((item, i) => (
+                <motion.div key={item} {...inUp(i * 0.08)}
+                  className="flex items-center gap-4 p-5 rounded-xl border border-[#E8E8E6] bg-[#F7F7F5] group hover:border-[#FF6A00] hover:bg-white transition-all duration-300">
+                  <div className="w-8 h-8 rounded-lg bg-[#FF6A00]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#FF6A00] transition-colors duration-300">
+                    <svg className="w-4 h-4 text-[#FF6A00] group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[15px] font-medium text-[#0B0B0C]">{item}</span>
                 </motion.div>
               ))}
             </div>
@@ -153,145 +141,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SHIFT ─── */}
-      <section className="py-32 border-t border-white/[0.05] relative overflow-hidden">
-        <div className="orb w-[800px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#6C5CE7]/8" />
-        <div className="wrap relative z-10 text-center">
-          <motion.div {...inUp()}>
-            <p className="label mb-8">The Diagnosis</p>
-            <h2 className="d2 text-white max-w-4xl mx-auto leading-tight">
-              You don't have a lead problem.
-              <br />
-              <span className="gt-v">You have a system problem.</span>
-            </h2>
-            <p className="body text-[17px] max-w-2xl mx-auto mt-8">
-              Disconnected workflows, manual processes, and inconsistent follow-up create invisible revenue leaks. The answer is not more effort — it is better-designed infrastructure.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── SYSTEMS ─── */}
-      <section className="py-32 border-t border-white/[0.05] relative">
-        <div className="orb w-[500px] h-[500px] bottom-0 left-0 bg-[#00F5D4]/4" />
-        <div className="wrap relative z-10">
-          <motion.div {...inUp()} className="mb-16">
-            <div className="aqua-line mb-6" />
-            <p className="label-v mb-4">System Architecture</p>
-            <h2 className="d2 text-white max-w-2xl">
-              Three systems.
-              <br />
-              <span className="text-[#2E3044]">One operating infrastructure.</span>
-            </h2>
+      {/* ── SERVICES PREVIEW ── */}
+      <section className="section border-b border-[#E8E8E6] bg-[#F7F7F5]">
+        <div className="wrap">
+          <motion.div {...inUp()} className="text-center mb-14">
+            <div className="flex justify-center mb-5"><div className="o-line" /></div>
+            <p className="label-o mb-3">Our Services</p>
+            <h2 className="d2">Three systems that fix your growth.</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-            {systems.map((s, i) => (
-              <motion.div key={s.n} {...inUp(i * 0.12)} className="card-cinema p-8 flex flex-col relative overflow-hidden group">
-                {/* Hover glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at 50% 0%, ${s.accent}10 0%, transparent 70%)` }} />
-
-                <span className="mono block mb-5">{s.n}</span>
-                <h3 className="text-white font-bold text-[20px] mb-3 tracking-tight">{s.name}</h3>
-                <p className="body-sm flex-1 mb-6">{s.body}</p>
-                <div className="border-t border-white/[0.05] pt-5">
-                  <p className="text-[12px] font-semibold" style={{ color: s.accent }}>{s.outcome}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {services.map((s, i) => (
+              <motion.div key={s.n} {...inUp(i * 0.1)} className="card p-8 bg-white flex flex-col">
+                <span className="num block mb-4">{s.n}</span>
+                <h3 className="d4 mb-3">{s.name}</h3>
+                <p className="body flex-1 mb-5">{s.desc}</p>
+                <div className="border-t border-[#E8E8E6] pt-4">
+                  <p className="text-[13px] font-semibold text-[#FF6A00]">{s.benefit}</p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <motion.div {...inUp(0.3)} className="mt-8">
-            <Link href="/systems" className="btn-ghost text-[13px]">
-              View full system details
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+          <motion.div {...inUp(0.3)} className="text-center mt-8">
+            <Link href="/services" className="btn-outline">View All Services</Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ─── PROCESS ─── */}
-      <section className="py-32 border-t border-white/[0.05] bg-[#0f1016] relative">
-        <div className="wrap relative z-10">
-          <motion.div {...inUp()} className="text-center mb-16">
-            <div className="flex justify-center mb-6"><div className="aqua-line" /></div>
-            <p className="label-v mb-4">How We Work</p>
-            <h2 className="d2 text-white">
-              From first interaction to
-              <br />
-              <span className="gt-v">fully deployed system.</span>
-            </h2>
+      {/* ── PROCESS ── */}
+      <section className="section border-b border-[#E8E8E6]">
+        <div className="wrap">
+          <motion.div {...inUp()} className="text-center mb-14">
+            <div className="flex justify-center mb-5"><div className="o-line" /></div>
+            <p className="label-o mb-3">How We Work</p>
+            <h2 className="d2">Up and running in days, not months.</h2>
           </motion.div>
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Connecting line */}
-            <div className="hidden lg:block absolute top-[28px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-[#6C5CE7]/20 to-transparent" />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {steps.map((s, i) => (
-                <motion.div key={s.n} {...inUp(i * 0.1)} className="card-cinema p-7 relative">
-                  <div className="w-10 h-10 rounded-xl bg-[#6C5CE7]/10 border border-[#6C5CE7]/20 flex items-center justify-center mb-5">
-                    <span className="mono">{s.n}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {steps.map((s, i) => (
+              <motion.div key={s.n} {...inUp(i * 0.08)} className="relative">
+                {i < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-[#FF6A00]/20 to-transparent z-10" />
+                )}
+                <div className="card-off p-7 h-full">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF6A00] flex items-center justify-center mb-5">
+                    <span className="text-white font-black text-[12px]">{s.n}</span>
                   </div>
-                  <h3 className="text-white font-bold text-[17px] mb-3">{s.label}</h3>
+                  <h3 className="text-[#0B0B0C] font-bold text-[15px] mb-3">{s.title}</h3>
                   <p className="body-sm">{s.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── RESULTS ─── */}
-      <section className="py-32 border-t border-white/[0.05] relative">
-        <div className="orb w-[600px] h-[400px] top-0 right-0 bg-[#00F5D4]/4" />
-        <div className="wrap relative z-10">
-          <motion.div {...inUp()} className="mb-16">
-            <div className="aqua-line mb-6" />
-            <p className="label-v mb-4">What Changes</p>
-            <h2 className="d2 text-white max-w-xl">
-              Measurable shifts in how your business operates.
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.04] rounded-2xl overflow-hidden border border-white/[0.04]">
-            {results.map((r, i) => (
-              <motion.div key={r.metric} {...inUp(i * 0.08)} className="bg-bg p-10 group">
-                <p className="label mb-5">{r.metric}</p>
-                <p className="d4 text-white group-hover:gt-v transition-all duration-300">{r.shift}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── FINAL CTA ─── */}
-      <section className="py-32 border-t border-white/[0.05] relative overflow-hidden">
-        <div className="orb w-[700px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#6C5CE7]/10" />
-        <div className="orb w-[300px] h-[300px] top-1/2 left-1/4 -translate-y-1/2 bg-[#00F5D4]/5" />
-
-        <div className="wrap relative z-10 text-center max-w-4xl mx-auto">
+      {/* ── FINAL CTA ── */}
+      <section className="section bg-[#0B0B0C]">
+        <div className="wrap text-center max-w-3xl mx-auto">
           <motion.div {...inUp()}>
-            <p className="label mb-8">The Decision</p>
-            <h2 className="d2 text-white mb-8 leading-tight">
-              If your business depends on constant effort,
+            <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-[#3d3d3d] mb-6">The Bottom Line</p>
+            <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-tight tracking-[-0.03em] mb-6">
+              Your business doesn't need more effort.
               <br />
-              <span className="gt-v">it's time to redesign the system.</span>
+              <span className="text-[#FF6A00]">It needs a better system.</span>
             </h2>
-            <p className="body text-[17px] max-w-lg mx-auto mb-12">
-              One conversation. We'll identify exactly where your business is losing momentum and what a system-driven solution looks like.
+            <p className="text-[16px] text-[#6B6B6B] mb-10 max-w-lg mx-auto leading-relaxed">
+              One free call. We'll identify exactly what's holding your growth back and show you what to fix first.
             </p>
-            <Link href="/contact" className="btn-primary text-[15px] py-4 px-10">
+            <Link href="/contact" className="btn-orange text-[15px] py-4 px-10">
               Book Strategy Call
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-            <p className="text-[12px] text-[#2E3044] mt-6">No pressure. Just clarity.</p>
+            <p className="text-[12px] text-[#3d3d3d] mt-5">No pressure. No pitch. We respond within 24 hours.</p>
           </motion.div>
         </div>
       </section>

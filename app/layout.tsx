@@ -4,12 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Beyond Nine — Intelligent Growth Systems",
-  description: "Beyond Nine designs intelligent systems that capture, respond, and convert — without manual effort.",
-  keywords: "AI automation, growth systems, intelligent systems, lead conversion, business automation",
+  title: "Beyond Nine — Growth Systems for Ambitious Businesses",
+  description: "Beyond Nine builds systems that capture, respond, and convert your leads — without manual effort. AI automation and smart system design.",
+  keywords: "lead capture, automation, WhatsApp automation, CRM setup, landing pages, business automation India",
   openGraph: {
-    title: "Beyond Nine — Intelligent Growth Systems",
-    description: "Growth doesn't fail from lack of effort. It fails from broken systems.",
+    title: "Beyond Nine — Growth Systems",
+    description: "Stop losing leads. Start converting automatically.",
     type: "website",
   },
 };
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-bg text-[#F0F0F8] antialiased">
+      <body className="bg-white text-[#0B0B0C] antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
