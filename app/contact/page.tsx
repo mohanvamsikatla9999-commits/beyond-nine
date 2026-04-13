@@ -1,18 +1,46 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import BookButton from "@/components/BookButton";
 
-/* Lazy-load Calendly script only on this page */
-function CalendlyScript() {
+/* Inline Calendly widget using initInlineWidget API */
+function CalendlyInline() {
+  const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (document.querySelector('script[src*="calendly"]')) return;
-    const s = document.createElement("script");
-    s.src = "https://assets.calendly.com/assets/external/widget.js";
-    s.async = true;
-    document.head.appendChild(s);
+    const init = () => {
+      const win = window as any;
+      if (!win.Calendly || !ref.current) return;
+      ref.current.innerHTML = "";
+      win.Calendly.initInlineWidget({
+        url: "https://calendly.com/mohanvamsikatla9999/30min?hide_gdpr_banner=1&primary_color=ff6a00",
+        parentElement: ref.current,
+      });
+    };
+
+    const existing = document.querySelector('script[src*="calendly"]');
+    if (existing) {
+      // Script already loaded — init immediately or wait briefly
+      const win = window as any;
+      if (win.Calendly) { init(); }
+      else { existing.addEventListener("load", init); }
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = init;
+    document.head.appendChild(script);
   }, []);
-  return null;
+
+  return (
+    <div
+      ref={ref}
+      className="w-full"
+      style={{ minHeight: "700px" }}
+    />
+  );
 }
 
 const problems = [
@@ -208,11 +236,7 @@ export default function ContactPage() {
             className="max-w-4xl mx-auto"
           >
             <div className="bg-white rounded-2xl border border-[#E5E5E3] shadow-[0_4px_40px_rgba(0,0,0,0.06)] overflow-hidden">
-              <div
-                className="calendly-inline-widget w-full"
-                data-url="https://calendly.com/mohanvamsikatla9999/30min?hide_gdpr_banner=1&primary_color=ff6a00"
-                style={{ minWidth: "320px", height: "700px" }}
-              />
+              <CalendlyInline />
             </div>
             <p className="text-center text-[12px] text-[#9A9A9A] mt-4">
               Powered by Calendly · 30-minute free strategy call · No obligation
@@ -221,8 +245,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Calendly script */}
-      <CalendlyScript />
+      {/* Calendly script - handled inside CalendlyInline */}
     </div>
   );
 }
