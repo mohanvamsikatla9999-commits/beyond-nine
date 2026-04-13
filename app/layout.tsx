@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CalendlyProvider from "@/components/CalendlyProvider";
 
 export const metadata: Metadata = {
   title: "Beyond Nine — Growth Systems for Ambitious Businesses",
@@ -18,9 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="bg-white text-[#0B0B0C] antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <CalendlyProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </CalendlyProvider>
       </body>
     </html>
   );

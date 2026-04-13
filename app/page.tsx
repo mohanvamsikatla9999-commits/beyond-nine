@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import BookButton from "@/components/BookButton";
 
 const up = (d = 0) => ({
   initial: { opacity: 0, y: 22 },
@@ -100,12 +101,7 @@ export default function HomePage() {
               </motion.p>
 
               <motion.div {...up(0.2)} className="flex flex-wrap gap-4">
-                <Link href="/contact" className="btn-cta">
-                  Book Strategy Call
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+                <BookButton label="Book Strategy Call" className="text-[15px] py-4 px-8" />
                 <Link href="/how-it-works" className="btn-line">See How It Works</Link>
               </motion.div>
 
@@ -195,8 +191,7 @@ export default function HomePage() {
               <p className="eyebrow mb-2">Our Solution</p>
               <p className="h4 text-[#0B0B0C]">We solve all three using automation systems — built specifically for your business.</p>
             </div>
-            <Link href="/services" className="btn-cta flex-shrink-0">See Our Services</Link>
-          </motion.div>
+            <Link href="/services" className="btn-cta flex-shrink-0">See Our Services</Link>          </motion.div>
         </div>
       </section>
 
@@ -316,12 +311,7 @@ export default function HomePage() {
             <p className="text-[16px] text-[#5A5A5A] mb-10 max-w-lg mx-auto leading-relaxed">
               One free call. We'll identify exactly what's holding your growth back and show you what to fix first.
             </p>
-            <Link href="/contact" className="btn-cta text-[15px] py-4 px-10">
-              Book Strategy Call
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+            <BookButton label="Book Strategy Call" className="text-[15px] py-4 px-10" />
             <p className="text-[12px] text-[#333] mt-5">Free consultation. No pressure. Response within 24 hours.</p>
           </motion.div>
         </div>

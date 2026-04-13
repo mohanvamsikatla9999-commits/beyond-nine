@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import BookButton from "@/components/BookButton";
 
 const iv = (d = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -151,7 +152,7 @@ export default function ServicesPage() {
             <p className="text-[14px] text-[#5A5A5A] mb-8">
               Book a free call. We'll figure out exactly what to fix first.
             </p>
-            <Link href="/contact" className="btn-cta">Book Free Call</Link>
+            <BookButton label="Book Free Call" />
             <p className="text-[12px] text-[#333] mt-4">No pressure. We respond within 24 hours.</p>
           </motion.div>
         </div>

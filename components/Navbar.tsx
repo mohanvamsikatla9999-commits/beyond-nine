@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import BookButton from "./BookButton";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -50,7 +51,7 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <Link href="/contact" className="btn-line text-[13px] py-2.5 px-5">Contact</Link>
-            <Link href="/contact" className="btn-cta text-[13px] py-2.5 px-5">Book Free Call</Link>
+            <BookButton label="Book Free Call" className="text-[13px] py-2.5 px-5" />
           </div>
 
           <button onClick={() => setOpen(!open)} className="md:hidden p-2" aria-label="Menu">
@@ -76,7 +77,7 @@ export default function Navbar() {
                   {l.label}
                 </Link>
               ))}
-              <Link href="/contact" className="btn-cta mt-2 justify-center py-3 text-[13px]">Book Free Call</Link>
+              <BookButton label="Book Free Call" className="mt-2 justify-center py-3 text-[13px] w-full" />
             </div>
           </motion.div>
         )}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BookButton from "./BookButton";
 
 export default function Footer() {
   return (
@@ -41,7 +42,7 @@ export default function Footer() {
             <p className="text-[13px] text-[#5A5A5A] mb-5 leading-relaxed">
               Book a free call. We'll show you exactly what to fix first.
             </p>
-            <Link href="/contact" className="btn-cta text-[13px] py-2.5 px-5">Book Free Call</Link>
+            <BookButton label="Book Free Call" className="text-[13px] py-2.5 px-5" />
           </div>
         </div>
 

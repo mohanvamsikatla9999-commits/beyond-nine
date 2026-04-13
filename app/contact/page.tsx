@@ -1,6 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import BookButton from "@/components/BookButton";
+
+/* Lazy-load Calendly script only on this page */
+function CalendlyScript() {
+  useEffect(() => {
+    if (document.querySelector('script[src*="calendly"]')) return;
+    const s = document.createElement("script");
+    s.src = "https://assets.calendly.com/assets/external/widget.js";
+    s.async = true;
+    document.head.appendChild(s);
+  }, []);
+  return null;
+}
 
 const problems = [
   "Not getting enough leads",
@@ -168,6 +181,48 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* ── INLINE CALENDLY ── */}
+      <section className="sec border-t border-[#E5E5E3] bg-[#F8F8F8]">
+        <div className="wrap">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-10"
+          >
+            <div className="o-bar mx-auto mb-5" />
+            <p className="eyebrow mb-3">Or Book Directly</p>
+            <h2 className="h2 mb-3">Book Your Strategy Call</h2>
+            <p className="lead max-w-lg mx-auto">
+              Choose a time that works for you and answer a few quick questions so we can understand your business.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="bg-white rounded-2xl border border-[#E5E5E3] shadow-[0_4px_40px_rgba(0,0,0,0.06)] overflow-hidden">
+              <div
+                className="calendly-inline-widget w-full"
+                data-url="https://calendly.com/mohanvamsikatla9999/30min?hide_gdpr_banner=1&primary_color=ff6a00"
+                style={{ minWidth: "320px", height: "700px" }}
+              />
+            </div>
+            <p className="text-center text-[12px] text-[#9A9A9A] mt-4">
+              Powered by Calendly · 30-minute free strategy call · No obligation
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Calendly script */}
+      <CalendlyScript />
     </div>
   );
 }
