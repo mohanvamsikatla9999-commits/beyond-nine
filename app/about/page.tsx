@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import BookButton from "@/components/BookButton";
+import TiltCard from "@/components/TiltCard";
 
 const iv = (d = 0) => ({
   initial: { opacity: 0, y: 18 },
