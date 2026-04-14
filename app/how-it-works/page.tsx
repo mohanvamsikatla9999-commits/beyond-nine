@@ -126,7 +126,7 @@ export default function HowItWorksPage() {
           <motion.div {...iv()}>
             <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-white tracking-[-0.03em] mb-4">Ready to get started?</h2>
             <p className="text-[14px] text-[rgba(255,255,255,0.4)] mb-8">Book a free 30-minute call. We'll show you exactly what to build first.</p>
-            <BookButton label="Book Strategy Call" />
+            <BookButton label="Book Strategy Call" variant="inverted" />
             <p className="text-[12px] text-[rgba(255,255,255,0.2)] mt-4">No pressure. We respond within 24 hours.</p>
           </motion.div>
         </div>

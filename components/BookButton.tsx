@@ -4,7 +4,7 @@ import { useCalendly } from "./CalendlyProvider";
 interface Props {
   label?: string;
   className?: string;
-  variant?: "primary" | "dark" | "outline";
+  variant?: "primary" | "inverted" | "outline";
 }
 
 const ArrowIcon = () => (
@@ -13,21 +13,26 @@ const ArrowIcon = () => (
   </svg>
 );
 
-export default function BookButton({ label = "Book Strategy Call", className = "", variant = "primary" }: Props) {
+export default function BookButton({
+  label = "Book Strategy Call",
+  className = "",
+  variant = "primary",
+}: Props) {
   const { openCalendly } = useCalendly();
 
-  const base = "inline-flex items-center gap-2 font-bold rounded-[10px] transition-all duration-200 cursor-pointer";
-
-  const styles = {
-    primary: "btn-cta",
-    dark: "btn-cta-dark",
-    outline: "btn-line",
+  const styles: Record<string, string> = {
+    primary: "btn-or",
+    inverted: "btn-or-inv",
+    outline: "btn-ghost",
   };
 
   return (
-    <button onClick={openCalendly} className={`${base} ${styles[variant]} ${className}`}>
+    <button
+      onClick={openCalendly}
+      className={`inline-flex items-center gap-2 font-bold rounded-[12px] transition-all duration-200 cursor-pointer ${styles[variant]} ${className}`}
+    >
       {label}
-      {variant !== "outline" && <ArrowIcon />}
+      <ArrowIcon />
     </button>
   );
 }

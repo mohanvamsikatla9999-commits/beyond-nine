@@ -415,7 +415,7 @@ export default function HomePage() {
             <p className="text-[16px] text-[rgba(255,255,255,0.45)] mb-12 max-w-lg mx-auto leading-relaxed">
               One free call. We'll identify exactly what's holding your growth back and show you what to fix first.
             </p>
-            <BookButton label="Fix My Lead System" className="text-[15px] py-4 px-10" />
+            <BookButton label="Fix My Lead System" variant="inverted" className="text-[15px] py-4 px-10" />
             <p className="text-[12px] text-[rgba(255,255,255,0.2)] mt-6">Free consultation. No pressure. Response within 24 hours.</p>
           </motion.div>
         </div>

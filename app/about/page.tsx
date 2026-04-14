@@ -134,7 +134,7 @@ export default function AboutPage() {
           <motion.div {...iv()}>
             <h2 className="text-[clamp(1.8rem,4vw,3.2rem)] font-black text-white tracking-[-0.03em] mb-4">Want to work with us?</h2>
             <p className="text-[14px] text-[rgba(255,255,255,0.4)] mb-8">Book a free call. No pitch, no pressure — just a conversation about your business.</p>
-            <BookButton label="Book Strategy Call" />
+            <BookButton label="Book Strategy Call" variant="inverted" />
           </motion.div>
         </div>
       </section>

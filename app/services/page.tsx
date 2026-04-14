@@ -128,7 +128,7 @@ export default function ServicesPage() {
               Not sure which service you need?
             </h2>
             <p className="text-[14px] text-[rgba(255,255,255,0.4)] mb-8">Book a free call. We'll figure out exactly what to fix first.</p>
-            <BookButton label="Book Free Call" />
+            <BookButton label="Book Free Call" variant="inverted" />
             <p className="text-[12px] text-[rgba(255,255,255,0.2)] mt-4">No pressure. We respond within 24 hours.</p>
           </motion.div>
         </div>
