@@ -8,6 +8,7 @@ import BookButton from "./BookButton";
 const links = [
   { href: "/services", label: "Services" },
   { href: "/how-it-works", label: "How It Works" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/about", label: "About" },
 ];
 

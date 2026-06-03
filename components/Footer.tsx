@@ -28,6 +28,7 @@ export default function Footer() {
                 { href: "/", label: "Home" },
                 { href: "/services", label: "Services" },
                 { href: "/how-it-works", label: "How It Works" },
+                { href: "/portfolio", label: "Portfolio" },
                 { href: "/about", label: "About" },
                 { href: "/contact", label: "Contact" },
               ].map((l) => (
