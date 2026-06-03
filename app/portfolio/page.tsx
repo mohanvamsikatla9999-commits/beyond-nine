@@ -35,10 +35,34 @@ const projects = [
     icon: "🏥",
     status: "Live",
   },
+  {
+    id: "kammani-vindhu",
+    title: "Kammani Vindhu Restaurant",
+    tagline: "Bold, immersive website for an authentic Indian restaurant — a feast for the eyes",
+    category: "F&B · Web Design",
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
+    description:
+      "A world-class restaurant landing page inspired by premium editorial food design. Features a deep spice-dark color system, orbiting food emoji hero, auto-scrolling marquee, full filterable menu with 27 dishes, house specialties showcase, animated gallery grid, testimonials carousel, table reservation form with validation, and a dark-themed map contact section.",
+    highlights: [
+      "Immersive hero with orbiting dish plates & floating badge cards",
+      "Auto-scrolling spice marquee banner",
+      "Full filterable menu — 27 dishes across 7 categories",
+      "House Specialties section with origin stories",
+      "Animated emoji gallery grid with quote strip",
+      "Table reservation form with guest selector & time slots",
+    ],
+    liveUrl: "https://kammani-vindhu.vercel.app",
+    githubUrl: "https://github.com/mohanvamsikatla9999-commits/kammani-vindhu",
+    accentColor: "#C8410A",
+    bgFrom: "#1A0A00",
+    bgTo: "#3D1F06",
+    icon: "🍛",
+    status: "Live",
+  },
 ];
 
 const stats = [
-  { v: "1", l: "Projects Delivered" },
+  { v: "2", l: "Projects Delivered" },
   { v: "100%", l: "Client Satisfaction" },
   { v: "< 7d", l: "Avg. Delivery Time" },
   { v: "∞", l: "Revisions Until Perfect" },
